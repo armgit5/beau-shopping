@@ -19,113 +19,87 @@ import { tokenNotExpired } from 'angular2-jwt';
 })
 export class CoffeesComponent {
 
-    coffees: Coffee[];
-    filterArg: Category;
-    $coffee: Subscription;
+  coffees: Coffee[];
+  filterArg: Category;
+  $coffee: Subscription;
 
-    public alerts: any = [];
+  public alerts: any = [];
 
-    // Company Name and User Name
-    email = '';
-    companyName = '';
+  // Company Name and User Name
+  email = '';
+  companyName = '';
 
-    // isNew: boolean = true;
-    // inputId: string = "";
+  @ViewChild('staticModal') button;
 
-    @ViewChild('staticModal') button;
+  onFilter(filter) {
+    this.filterArg = filter;
+  }
 
-    onFilter(filter) {
-        this.filterArg = filter;
-    }
+  constructor(private coffeeService: CoffeeService,
+    private router: Router,
+    private categoryService: CategoryService,
+    private loginService: LoginService) {
 
-    constructor(private coffeeService: CoffeeService,
-                private router: Router,
-                private categoryService: CategoryService,
-                private loginService: LoginService) {
+    this.subToUserCoffees(this.loginService.user);
 
-      if (apiMethods.v1 || apiMethods.vCompanies) {
-
-        this.subToUserCoffees(this.loginService.user);
-
-        // This is for the first time opening the page
-        // and the user info is not loaded fast enough
-        // from firebase
-        loginService.userOutput.subscribe(
-          (user: User) => {
-            this.email = user.email;
-            this.companyName = user.companyName;
-            this.subToUserCoffees(user);
-          }
-        );
-
-        this.categoryService.categoryChanged.subscribe(filterArg => {
-          this.filterArg = filterArg;
-          console.log(filterArg);
-        });
-
+    // This is for the first time opening the page
+    // and the user info is not loaded fast enough
+    // from firebase
+    loginService.userOutput.subscribe(
+      (user: User) => {
+        this.email = user.email;
+        this.companyName = user.companyName;
+        this.subToUserCoffees(user);
       }
+    );
 
-      if (apiMethods.vWuth) {
-        if (localStorage.getItem('username') == null) {
-          loginService.userOutput.subscribe(
-          (user: User) => {
-            this.email = user.email;
-            this.companyName = user.companyName;
-            this.subToUserCoffees(user);
-          });
-        } else {
-          this.email = localStorage.getItem('username');
-        }
-        this.companyName = 'OASIT';
-        this.coffeeService.loadAllCoffees(null).subscribe(
-          coffees => {this.coffees = coffees; console.log(coffees)}
-        );
+    this.categoryService.categoryChanged.subscribe(filterArg => {
+      this.filterArg = filterArg;
+      console.log(filterArg);
+    });
+
+  }
+
+  private subToUserCoffees(user: User) {
+    this.$coffee = this.coffeeService.loadAllCoffees(user).subscribe(
+      coffees => {
+        this.coffees = coffees;
+        this.coffeeService.coffees = coffees;
+        console.log(JSON.stringify(coffees));
       }
-    }
+    );
+  }
 
-    private subToUserCoffees(user: User) {
-        if (apiMethods.v1 || apiMethods.vCompanies) {
-          this.$coffee = this.coffeeService.loadAllCoffees(user).subscribe(
-            coffees => {
-              this.coffees = coffees;
-              this.coffeeService.coffees = coffees;
-              console.log(JSON.stringify(coffees));
-            }
-          );
-        }
-    }
+  newCoffee() {
 
-    newCoffee() {
+    this.coffeeService.editCoffee(true, '');
+    this.button.show();
 
-      this.coffeeService.editCoffee(true, '');
-      this.button.show();
+  }
 
-    }
+  onNgDestroy() {
+    this.$coffee.unsubscribe();
+  }
 
-    onNgDestroy() {
-      this.$coffee.unsubscribe();
-    }
+  hide() {
+    this.button.hide();
+  }
 
-    hide() {
-      this.button.hide();
-    }
+  hideModal() {
+    this.hide();
+  }
 
-    hideModal() {
-      this.hide();
-    }
+  onEdit(coffeeOutput) {
+    this.button.show();
+  }
 
-    onEdit(coffeeOutput) {
-      // console.log('edit');
-      this.button.show();
-    }
-
-    onAdd(coffeeName) {
-      this.alerts.push({
-        type: 'success',
-        msg: `You successfully added ${coffeeName}`,
-        timeout: 2000
-      });
-    }
+  onAdd(coffeeName) {
+    this.alerts.push({
+      type: 'success',
+      msg: `You successfully added ${coffeeName}`,
+      timeout: 2000
+    });
+  }
 
 
 

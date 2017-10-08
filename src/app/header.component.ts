@@ -1,13 +1,8 @@
 import { Component, Input, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
-import { cartData } from './cart/cartData';
 import { CoffeeService } from './coffees/coffee.service';
-import { Observable } from 'rxjs/Observable';
-import { Category } from './coffees/category/category';
 import { CategoryService } from './coffees/category/category.service';
 import { Subscription } from 'rxjs/Rx';
 import { LoginService } from './login/login.service';
-import { apiMethods } from '../environments/environment';
-import { tokenNotExpired } from 'angular2-jwt';
 
 @Component({
     selector: 'my-header',
@@ -46,7 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                   console.log('false');
                   this.loginStatus = false;
                   this.customerName = null;
-                  this.login();
+                  // this.login();
               }
           });
     }

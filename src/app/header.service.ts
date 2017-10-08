@@ -6,12 +6,10 @@ import { cartData } from './cart/cartData';
 export class CoffeeService {
 
     cart = cartData.cart;
-    
     constructor(private http: Http) {
     }
 
     updateCart() {
         return this.cart.length;
     }
-    
 }
