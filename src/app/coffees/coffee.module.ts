@@ -14,6 +14,7 @@ import { ImageCropperComponent } from 'ng2-img-cropper';
 import { ModalModule } from 'ngx-bootstrap';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { CoffeeRoutingModule } from './coffee-routing.module';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
 
 
 @NgModule ({
@@ -24,6 +25,7 @@ import { CoffeeRoutingModule } from './coffee-routing.module';
     CoffeesComponent,
     CategoryComponent,
     ImageCropperComponent,
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,

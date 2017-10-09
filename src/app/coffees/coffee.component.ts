@@ -45,14 +45,12 @@ export class CoffeeComponent implements OnInit {
 
     plus() {
       this.coffeeCount++;
-      // console.log("plus");
     }
 
     minus() {
       if (this.coffeeCount > 1) {
         this.coffeeCount--;
       }
-      // console.log("minus");
     }
 
     addCoffeeAlert() {
@@ -66,12 +64,6 @@ export class CoffeeComponent implements OnInit {
       this.addCoffeeAlert();
       this.coffeeService.addToCart(this.coffee, Number(this.coffeeCount), this.comment);
       this.coffeeCount = 1;
-      // this.alerts.push({
-      //   type: 'md-local',
-      //   msg: `${this.coffee.name} is added to cart`,
-      //   timeout: 2000
-      // });
-      // this.comment = "";
       this.addCoffeeOutput.emit(this.coffee.name);
     }
 
@@ -90,6 +82,10 @@ export class CoffeeComponent implements OnInit {
 
     out() {
       this.mouseOver = false;
+    }
+
+    goToDetail() {
+      this.router.navigateByUrl('/product/detail/1');
     }
 
 
