@@ -1,92 +1,69 @@
-
 <form [formGroup]="coffeeForm" (ngSubmit)="createCoffee()">
-<div class="col-md-5">
-<div class="product-title">
-  <div class="img-middle" align="middle">
-      <img *ngIf="!uploaded"
-        align="middle"
-        alt="Simple Living Seneca Reclaimed Double 'X' Design Cocktail Table"
-        class="img-responsive product-img"
-        src={{imageUrl}}>
-      <img [src]="data1.image" *ngIf="data1.image && uploaded"
-      [width]="cropperSettings1.croppedWidth"
-      [height]="cropperSettings1.croppedHeight">
-  </div>
+  <div class="col-md-5">
+    <div class="product-title">
+      <div class="img-middle" align="middle">
+        <img *ngIf="!uploaded" align="middle" alt="Simple Living Seneca Reclaimed Double 'X' Design Cocktail Table" class="img-responsive product-img"
+          src={{imageUrl}}>
+        <img [src]="data1.image" *ngIf="data1.image && uploaded" [width]="cropperSettings1.croppedWidth" [height]="cropperSettings1.croppedHeight">
+      </div>
 
-  <div class="product-info" style="margin-top:5px;">
+      <div class="product-info" style="margin-top:5px;">
 
-      <div class="row" style="padding:0px;margin-bottom:3px">
-        <div class="col-md-4">Category</div>
-        <div class="col-md-8" style="padding:0px">
-          <select class="form-control"
-            formControlName="category"
-            [(ngModel)]="selectedCategory">
+        <div class="row" style="padding:0px;margin-bottom:3px">
+          <div class="col-md-4">Category</div>
+          <div class="col-md-8" style="padding:0px">
+            <select class="form-control" formControlName="category" [(ngModel)]="selectedCategory">
             <option *ngFor="let category of categories; let i = index;"
                     [ngValue]="category.$key">{{category.name}}</option>
           </select>
+          </div>
         </div>
-      </div>
-      <div class="row form-group" style="padding:0px;margin-bottom:3px">
-        <div class="col-md-4">Type</div>
-        <div class="col-md-8" style="padding:0px">
-          <select class="form-control"
-            formControlName="type"
-            [(ngModel)]="selectedType">
+        <div class="row form-group" style="padding:0px;margin-bottom:3px">
+          <div class="col-md-4">Type</div>
+          <div class="col-md-8" style="padding:0px">
+            <select class="form-control" formControlName="type" [(ngModel)]="selectedType">
             <option *ngFor="let type of types"
               [ngValue]="type.name"
               [attr.selected]="type.name == name2 ? true : null">{{type.name}}</option>
           </select>
+          </div>
         </div>
-      </div>
 
-      <div class="row" style="padding:0px;margin-bottom:3px">
-        <div class="col-md-4">Name</div>
-        <div class="col-md-8" style="padding:0px">
+        <div class="row" style="padding:0px;margin-bottom:3px">
+          <div class="col-md-4">Name</div>
+          <div class="col-md-8" style="padding:0px">
             <div class="product-title form-group" style="margin:0px">
-              <input class="form-control ng-touched ng-dirty ng-invalid"
-                formControlName="name"
-                id="name"
-                placeholder="Name..."
-                type="text"
-                style="padding-left:5px"
-                 maxlength="13">
+              <input class="form-control ng-touched ng-dirty ng-invalid" formControlName="name" id="name" placeholder="Name..." type="text"
+                style="padding-left:5px" maxlength="13">
             </div>
+          </div>
         </div>
-      </div>
 
-      <div class="row" style="padding:0px;margin-bottom:3px">
-        <div class="col-md-4">Price</div>
-        <div class="col-md-8" style="padding:0px">
+        <div class="row" style="padding:0px;margin-bottom:3px">
+          <div class="col-md-4">Price</div>
+          <div class="col-md-8" style="padding:0px">
             <div class="product-title form-group" style="margin:0px">
-              <input class="form-control ng-touched ng-dirty ng-invalid"
-                formControlName="price"
-                id="price"
-                placeholder="Price..."
-                type="number"
-                style="padding-left:5px"
-                min="1"
-                max="99999">
+              <input class="form-control ng-touched ng-dirty ng-invalid" formControlName="price" id="price" placeholder="Price..." type="number"
+                style="padding-left:5px" min="1" max="99999">
             </div>
+          </div>
         </div>
+
       </div>
 
+    </div>
   </div>
 
-  </div>
-</div>
-
-<div class="col-md-7" style="padding-left:55px">
+  <div class="col-md-7" style="padding-left:55px">
     <span>
       <img-cropper #cropper [image]="data1" [settings]="cropperSettings1" (onCrop)="cropped($event)"></img-cropper>
     </span>
-</div>
-<div class="row" style="padding: 5px;padding-right: 35px">
-    <!-- <button class="btn btn-default pull-right" type="submit" [disabled]="!coffeeForm.valid || notReady || spinning"> -->
+  </div>
+  <div class="row" style="padding: 5px;padding-right: 35px">
     <button class="btn btn-default pull-right" type="submit">
         <i class="fa fa-coffee" style="font-weight: bold;" *ngIf="!spinning"></i>
         <i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true" *ngIf="spinning"></i>
         Upload
     </button>
-</div>
+  </div>
 </form>
-<!--<button (click)="test()">Test</button>-->

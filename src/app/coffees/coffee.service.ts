@@ -63,15 +63,6 @@ export class CoffeeService {
 
     addToCart(coffee, count, comment) {
         let alreadyInCart = false;
-        // this.coffeeCounts = count;
-        // Check to see if this coffee is already added
-        // this.cart.forEach(cartCoffee => {
-        //     if (coffee.$key == cartCoffee.coffeeId) {
-        //          cartCoffee.qty += count;
-        //          cartCoffee.comment = comment;
-        //          alreadyInCart = true;
-        //     }
-        // });
 
         if (!alreadyInCart) {
             this.cartCoffees.push({

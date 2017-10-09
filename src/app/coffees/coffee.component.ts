@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { coffeesData } from './coffeesData';
-import {Coffee} from "./coffee";
+import {Coffee} from './coffee';
 import { cartData } from '../cart/cartData';
 import { CoffeeService } from './coffee.service';
-import { Observable } from "rxjs/Rx";
-import { Router } from "@angular/router";
+import { Observable } from 'rxjs/Rx';
+import { Router } from '@angular/router';
 import { CategoryService } from './category/category.service';
 import { CoffeeOutput } from './coffee-output';
 
@@ -30,7 +30,7 @@ export class CoffeeComponent implements OnInit {
     coffeeCount:number = 1;
     coffeeCountModel = 1;
     cart = cartData.cart;
-    comment:string = "";
+    comment:string = '';
     public alerts: any = [];
 
 
@@ -76,26 +76,20 @@ export class CoffeeComponent implements OnInit {
     }
 
     editCoffee() {
-      // this.router.navigate(['/coffee', this.coffee.$key, "edit"]);
-      // let outputData = new CoffeeOutput(false, this.coffee.$key);
-      // this.editCoffeeOutput.emit(outputData);
       this.coffeeService.editCoffee(false, this.coffee.$key);
       this.editCoffeeOutput.emit();
     }
 
     deleteCoffee() {
-      console.log("delete coffee " + this.coffee.$key);
       this.coffeeService.deleteCoffee(this.coffee.$key);
     }
 
     over() {
       this.mouseOver = true;
-      // console.log('over');
     }
 
     out() {
       this.mouseOver = false;
-      // console.log('out');
     }
 
 

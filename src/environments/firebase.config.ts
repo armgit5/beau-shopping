@@ -1,7 +1,9 @@
 
 export const firebaseConfig = {
-    apiKey: 'AIzaSyCAeCIQG_FmWxrHFk6eI2J9KQh6B8Ockig',
-    authDomain: 'birdnetbucket.firebaseio.com',
-    databaseURL: 'https://birdnetbucket.firebaseio.com',
-    storageBucket: 'birdnetbucketappspot.com'
+  apiKey: 'AIzaSyBXAdgROT07nDsccTrQHjqLIM7gvz5YZpk',
+  authDomain: 'beau-shopping.firebaseapp.com',
+  databaseURL: 'https://beau-shopping.firebaseio.com',
+  projectId: 'beau-shopping',
+  storageBucket: 'beau-shopping.appspot.com',
+  messagingSenderId: '965267445568'
 };
